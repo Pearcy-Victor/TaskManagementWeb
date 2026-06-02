@@ -1,0 +1,66 @@
+/*
+ * Global stylesheet. Kept intentionally minimal — this tutorial focuses on
+ * Angular architecture, not on CSS. Every component owns its own styles in
+ * a `styles` array or template inline styles, so this file only sets a
+ * handful of sensible defaults and design tokens.
+ */
+
+:root {
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-border: #e1e4e8;
+  --color-text: #24292e;
+  --color-muted: #6a737d;
+  --color-primary: #0366d6;
+  --color-primary-hover: #024ea4;
+  --color-danger: #d73a49;
+  --color-success: #28a745;
+  --color-warning: #b08800;
+
+  --radius: 6px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: 12px;
+  margin-top: var(--space-1);
+}
