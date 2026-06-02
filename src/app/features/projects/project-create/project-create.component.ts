@@ -8,8 +8,8 @@
  *   - Router.navigate(['/projects']) on success.
  *
  * Form anatomy (worth memorising):
- *   - this.fb.nonGroup({...}) returns a FormGroup. Inside, each
- *     FormControl is itself a `this.fb.nonGroup(initialValue, [validators])`.
+ *   - this.fb.group({...}) returns a FormGroup. Inside, each
+ *     FormControl is itself a `this.fb.control(initialValue, [validators])`.
  *   - [formGroup]="form" on the <form> wires the two together.
  *   - formControlName="name" on each <input> binds that input to the
  *     named control. The names must match the keys in the FormGroup.
@@ -22,12 +22,11 @@ import { Router, RouterLink } from '@angular/router';
 
 import { ProjectService } from '../../../core/services/project.service';
 import { ErrorMessageComponent } from '../../../shared/components/error-message/error-message.component';
-import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-project-create',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, ErrorMessageComponent, LoadingSpinnerComponent],
+  imports: [ReactiveFormsModule, RouterLink, ErrorMessageComponent],
   template: `
     <section class="page">
       <a routerLink="/projects" class="back">← Back to projects</a>
@@ -92,8 +91,8 @@ export class ProjectCreateComponent {
   readonly loading = signal(false);
   readonly errorMessage = signal<string | null>(null);
 
-  readonly form = this.fb.nonGroup({
-    name: this.fb.nonGroup('', [Validators.required, Validators.maxLength(100)]),
+  readonly form = this.fb.group({
+    name: this.fb.control('', [Validators.required, Validators.maxLength(100)]),
     description: this.fb.control('')
   });
 

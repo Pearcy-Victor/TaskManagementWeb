@@ -100,8 +100,8 @@ export class ProjectEditComponent implements OnInit {
   readonly loading = signal(false);
   readonly errorMessage = signal<string | null>(null);
 
-  readonly form = this.fb.nonGroup({
-    name: this.fb.nonGroup('', [Validators.required, Validators.maxLength(100)]),
+  readonly form = this.fb.group({
+    name: this.fb.control('', [Validators.required, Validators.maxLength(100)]),
     description: this.fb.control('')
   });
 

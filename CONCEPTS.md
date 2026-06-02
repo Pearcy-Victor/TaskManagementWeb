@@ -151,14 +151,14 @@ Reactive Forms are explicit, programmatic, and testable. You build the form in T
 ### Minimal example (from `login.component.ts`)
 
 ```ts
-readonly form = this.fb.nonGroup({
-  userName: this.fb.nonGroup('', [Validators.required]),
-  password: this.fb.nonGroup('', [Validators.required, Validators.minLength(3)])
+readonly form = this.fb.group({
+  userName: this.fb.control('', [Validators.required]),
+  password: this.fb.control('', [Validators.required, Validators.minLength(3)])
 });
 ```
 
-- `fb.nonGroup({...})` is a shortcut for `new FormGroup({...})` where every control is **non-nullable** (the value is guaranteed to be a string, never `null`). Use `fb.group({...})` if you want nullable controls.
-- The first argument of `fb.nonGroup(value, [validators])` is the initial value.
+- `fb.group({...})` creates a FormGroup from a specification object.
+- The first argument of `fb.control(value, [validators])` is the initial value.
 - The array of validators runs every time the value changes.
 
 ### Common validators

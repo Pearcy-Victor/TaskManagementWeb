@@ -101,11 +101,11 @@ export class TaskEditComponent implements OnInit {
   readonly loading      = signal(false);
   readonly errorMessage = signal<string | null>(null);
 
-  readonly form = this.fb.nonGroup({
-    title:       this.fb.nonGroup('', [Validators.required, Validators.maxLength(200)]),
+  readonly form = this.fb.group({
+    title:       this.fb.control('', [Validators.required, Validators.maxLength(200)]),
     description: this.fb.control(''),
-    status:      this.fb.nonGroup<'Pending' | 'InProgress' | 'Completed'>('Pending'),
-    priority:    this.fb.nonGroup<'Low' | 'Medium' | 'High'>('Medium')
+    status:      this.fb.control<'Pending' | 'InProgress' | 'Completed'>('Pending'),
+    priority:    this.fb.control<'Low' | 'Medium' | 'High'>('Medium')
   });
 
   ngOnInit(): void {

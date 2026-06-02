@@ -22,12 +22,11 @@ import { ProjectService } from '../../../core/services/project.service';
 import { Project } from '../../../core/models/project.model';
 import { TASK_STATUSES, TASK_PRIORITIES } from '../../../core/models/task.model';
 import { ErrorMessageComponent } from '../../../shared/components/error-message/error-message.component';
-import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-task-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, ErrorMessageComponent, LoadingSpinnerComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, ErrorMessageComponent],
   template: `
     <section class="page">
       <a routerLink="/tasks" class="back">← Back to tasks</a>
@@ -121,12 +120,12 @@ export class TaskCreateComponent implements OnInit {
   readonly loading      = signal(false);
   readonly errorMessage = signal<string | null>(null);
 
-  readonly form = this.fb.nonGroup({
-    title:       this.fb.nonGroup('', [Validators.required, Validators.maxLength(200)]),
+  readonly form = this.fb.group({
+    title:       this.fb.control('', [Validators.required, Validators.maxLength(200)]),
     description: this.fb.control(''),
-    status:      this.fb.nonGroup<'Pending' | 'InProgress' | 'Completed'>('Pending'),
-    priority:    this.fb.nonGroup<'Low' | 'Medium' | 'High'>('Medium'),
-    projectId:   this.fb.nonGroup('', [Validators.required])
+    status:      this.fb.control<'Pending' | 'InProgress' | 'Completed'>('Pending'),
+    priority:    this.fb.control<'Low' | 'Medium' | 'High'>('Medium'),
+    projectId:   this.fb.control('', [Validators.required])
   });
 
   ngOnInit(): void {

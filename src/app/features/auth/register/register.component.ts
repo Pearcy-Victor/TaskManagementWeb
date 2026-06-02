@@ -122,10 +122,10 @@ export class RegisterComponent {
   readonly loading = signal(false);
   readonly errorMessage = signal<string | null>(null);
 
-  readonly form = this.fb.nonGroup({
-    userName: this.fb.nonGroup('', [Validators.required, Validators.minLength(3)]),
-    email:    this.fb.nonGroup('', [Validators.required, Validators.email]),
-    password: this.fb.nonGroup('', [Validators.required, Validators.minLength(6)])
+  readonly form = this.fb.group({
+    userName: this.fb.control('', [Validators.required, Validators.minLength(3)]),
+    email:    this.fb.control('', [Validators.required, Validators.email]),
+    password: this.fb.control('', [Validators.required, Validators.minLength(6)])
   });
 
   onSubmit(): void {

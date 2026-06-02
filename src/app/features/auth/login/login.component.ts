@@ -11,7 +11,8 @@
  * Reactive Forms primer:
  *   - FormGroup: a container for multiple FormControls.
  *   - FormControl: a single input field; tracks value + validity.
- *   - FormBuilder.nonGroup: a syntactic shortcut for `new FormControl(...)`.
+ *   - FormBuilder.group: creates a FormGroup from a specification object.
+ *   - FormBuilder.control: creates a FormControl with initial value and validators.
  *   - Validators.required: rejects empty strings.
  *   - Validators.minLength(n): rejects strings shorter than n.
  *   - Validators.email: rejects strings that don't look like an email
@@ -116,15 +117,14 @@ export class LoginComponent {
   /** Latest error message, if any. */
   readonly errorMessage = signal<string | null>(null);
 
-  /**
-   * FormGroup definition. FormBuilder.nonGroup is shorthand for
-   *   new FormControl('', { nonGroup: [Validators.required] })
-   * The first argument is the initial value; the second is the
-   * synchronous validators array.
-   */
-  readonly form = this.fb.nonGroup({
-    userName: this.fb.nonGroup('', [Validators.required]),
-    password: this.fb.nonGroup('', [Validators.required, Validators.minLength(3)])
+/**
+ * FormGroup definition. FormBuilder.group creates a FormGroup, and
+ * FormBuilder.control creates each FormControl with an initial value
+ * and synchronous validators.
+ */
+  readonly form = this.fb.group({
+    userName: this.fb.control('', [Validators.required]),
+    password: this.fb.control('', [Validators.required, Validators.minLength(3)])
   });
 
   onSubmit(): void {
